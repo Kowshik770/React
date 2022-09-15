@@ -1,39 +1,66 @@
-import{BrowserRouter,Routes,Route, json} from 'react-router-dom'
-import React,{Component} from 'react'
-import {Link} from 'react-router-dom'
-function EmployeeLogin (){
-    const [email,setEmail]=React.useState('');
-    const[Password,setPassword]=React.useState('');
-    const handleLogin=async()=>{
-        let result=await fetch("",{
-            method:'post',
-            body:JSON.stringify({email,Password}),
-            headers:{
-                'Content-Type':'application/json'
-            }
-        });
-        result=await result.json();
-        console.warn(result)
-        if(result.name)
-        {
-            localStorage.setItem('user',json.stringify(result))
-        }
-        else{
-            alert("please connect the correct details")
-        }
-    }
-	
-	return (
-	<div className='Login'>
-        <center><h1>Login</h1></center>
-        <input type="text" className='inputBox' placeholder='Enter Email' onChange={(e)=>setEmail(e.target.value)} value={email}></input>
-        <input type="Password" className='inputBox' placeholder='Enter Password' onChange={(e)=>setPassword(e.target.value)} value={Password}></input>
-        <button onClick={handleLogin} className='appButton' type='button'>Login</button>
+import axios from 'axios';
+import React, { Component } from 'react';
+
+import Inbox from './Inbox'
+import './App.css'
+
+export default class Login extends Component {
+    constructor(props) {
+      super(props)
     
-		<h1><Link to="/">Back To Home</Link></h1>
-	</div>
-	)
+      this.state = {
+         empid:Number,
+         password:'',
+         
+      }
+      this.handlechange=this.handlechange.bind(this);
+      this.Login=this.Login.bind(this);
+    }
+    handlechange(e){
+        this.setState(e);
+    }
 
+Login(){
+        console.log(this.state.empId);
+        console.log(this.state.password);
+        axios.get("http://localhost:22452/api/Employee/Login/"+this.state.empid+ '/'+this.state.password).
+        then(res=>res).then(
+            result=>{
+                console.log(result.data)
+                let r=result.data;
+                sessionStorage.setItem("empid",result.data.employeeid);
+                if(r!=null){
+                    alert("welcome "+ result.data.employeeName);
+                    window.location="/Inbox"
+
+                }else{
+                    alert("invalid credentials");
+                }
+            }).catch(err=>{
+                alert(err);
+
+            });
+    }
+
+
+    
+  render() {
+    return (
+        <>
+        <div className='container'>
+      <h1 className="heading">Login</h1>
+      <div className='form-group' >
+      <label>Username</label>
+      <input type='text' className='form-control' onChange={(e)=> this.handlechange({empid:e.target.value})} placeholder='enter empId' required /><br/>
+      </div>
+      <div className='form-group' >
+      <label>password</label>
+      <input type='password' className='form-control' onChange={(e)=> this.handlechange({password:e.target.value})} placeholder='enter password' required />
+      <br/></div>
+      <button className='btn btn-outline-primary' onClick={this.Login} >Login</button>
+      </div>
+      </>
+
+    )
+  }
 }
-
-export default EmployeeLogin;
