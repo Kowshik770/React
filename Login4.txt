@@ -1,0 +1,65 @@
+import axios from 'axios';
+import React, { Component } from 'react';
+
+
+
+
+export default class Login extends Component {
+    constructor(props) {
+      super(props)
+    
+      this.state = {
+         email:'',
+         password:'',
+         empid:''
+      }
+      this.handlechange=this.handlechange.bind(this);
+      this.Login=this.Login.bind(this);
+    }
+    handlechange(e){
+        this.setState(e);
+    }
+
+Login(){
+        console.log(this.state.empId);
+        console.log(this.state.password);
+        axios.get(+this.state.email+ '/'+this.state.password).
+        then(res=>res).then(
+            result=>{
+                let r=result.data;
+                sessionStorage.setItem("empid",result.data.employee_Id);
+                if(r!=null){
+                    alert("welcome "+ result.data.full_Name);
+                    window.location="/Inbox"
+
+                }else{
+                    alert("invalid credentials");
+                }
+            }).catch(err=>{
+                alert(err);
+
+            });
+    }
+
+
+    
+  render() {
+    return (
+        <>
+        <div className='container'>
+      <h1 className="heading">Login</h1>
+      <div className='form-group' >
+      <label>Username</label>
+      <input type='text' className='form-control' onChange={(e)=> this.handlechange({empId:e.target.value})} placeholder='enter empId' /><br/>
+      </div>
+      <div className='form-group' >
+      <label>password</label>
+      <input type='password' className='form-control' onChange={(e)=> this.handlechange({password:e.target.value})} placeholder='enter password' />
+      <br/></div>
+      <button className='btn btn-outline-primary' onClick={this.Login} >Login</button>
+      </div>
+      </>
+
+    )
+  }
+}
