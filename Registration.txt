@@ -1,0 +1,115 @@
+<body>
+                <form className="form">
+                    <h1>Register</h1>
+                    <div className="empid">
+                            <label><b>Employee Id</b></label><br></br>
+                            <input className="form-input" value={empid} onChange={(e)=> handleInputChange(e)} type="text" id="empid" required placeholder="Emp Id"></input>
+                        </div>
+
+                        <div className="name">
+                            <label><b>Name</b></label><br></br>
+                            <input className="form-input" value={name} onChange={(e)=> handleInputChange(e)} type="text" id="name" required placeholder="Name"></input>
+                        </div>
+
+                        <div className="email">
+                            <label><b>Email Id</b></label><br></br>
+                            <input className="form-input" value={email} onChange={(e)=> handleInputChange(e)} type="email" id="email" required placeholder="Email Id"></input>
+                        </div>
+
+                        <div className="password">
+                            <label><b>Password</b></label><br></br>
+                            <input className="form-input" value={password} onChange={(e)=> handleInputChange(e)} type="password" id="password" required placeholder="Password"></input>
+                        </div>
+
+                        <div className="mobileNo">
+                            <label><b>Mobile Number</b></label><br></br>
+                            <input className="form-input" value={mobileNo} onChange={(e)=> handleInputChange(e)} type="text" id="mobileNo" required placeholder="Mobile Number"></input>
+                        </div>
+
+                        <div className="dateOfJoin">
+                            <label><b>Date Of Join</b></label><br></br>
+                            <input className="form-input" value={dateOfJoin} onChange={(e)=> handleInputChange(e)} type="date" id="dateOfJoin" required placeholder="Date Of Join"></input>
+                        </div>
+
+                        <div className="department">
+                            <label><b>Department</b></label><br></br>
+                            <input className="form-input" value={department} onChange={(e)=> handleInputChange(e)} type="text" id="department" required placeholder="Department"></input>
+                        </div>
+
+                        <div className="managerId">
+                            <label><b>Manager Id</b></label><br></br>
+                            <input className="form-input" value={managerId} onChange={(e)=> handleInputChange(e)} type="text" id="managerId" required placeholder="Manager Id"></input>
+                        </div>
+                        <br></br>
+                        <div className='footer'>
+
+                        <button onClick={()=>handleSubmit} type="submit" class="btn">Signup</button>
+
+                        </div>
+                        <br></br>
+
+                        <span>Already have an account? Login</span>
+                  
+
+                </form>
+            </body>
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-image: url('./images/lms1.jpeg');
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+}
+
+.form{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 80vh;
+    width: 30vw;
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(8.5px);
+    border-radius: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    
+    
+}
+h1{
+    margin: 3rem 0 2rem 0;
+}
+
+
+.form-input{
+    
+    width: 100%;
+    height: 45%;
+    margin: 10px;
+    border-radius: 5px;
+    border-color:  rgba(8, 8, 8, 0.15);
+    color: rgb(7, 6, 6);
+    background: rgba(8, 8, 8, 0.15);
+    
+    
+}
+
+
+.btn{
+    background-color:rgb(14, 207, 88);
+    width: 100px;
+    height: 30px;
+    font-size: larger;
+    border-radius: 2px;
+    border-color: rgba(8, 8, 8, 0.15);
+    color: rgb(0, 0, 0);
+
+}
